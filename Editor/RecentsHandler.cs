@@ -76,5 +76,10 @@ namespace Editor
 
             return objects;
         }
+
+        public static void Refresh()
+        {
+            PullRecentsBuffer();
+        }
     }
 }

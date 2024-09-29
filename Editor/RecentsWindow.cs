@@ -9,7 +9,7 @@ namespace Editor
     {
         private List<Object> _objects;
 
-        [MenuItem("Window/Recents")]
+        [MenuItem("Ligofff/Recents Window")]
         public static void ShowWindow()
         {
             GetWindow<RecentsWindow>("Recents");
@@ -19,13 +19,14 @@ namespace Editor
         {
             _objects = new List<Object>();
             RecentsHandler.OnRecentsChanged += OnRecentsChanged;
+            _objects = RecentsHandler.GetObjects();
             Repaint();
         }
 
         private void OnRecentsChanged()
         {
             _objects = RecentsHandler.GetObjects();
-            this.Repaint();
+            Repaint();
         }
 
         private void OnGUI()
