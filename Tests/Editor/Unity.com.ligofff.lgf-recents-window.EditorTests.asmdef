@@ -1,0 +1,11 @@
+{
+  "name": "Unity.com.ligofff.lgf-recents-window.Editor.Tests",
+  "references": [
+    "Unity.com.ligofff.lgf-recents-window"
+  ],
+  "optionalUnityReferences": [
+    "TestAssemblies"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": []
+}
