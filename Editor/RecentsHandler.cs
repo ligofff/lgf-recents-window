@@ -36,7 +36,8 @@ namespace Editor
 
         private static void SelectionChanged()
         {
-            AddObjectToRecents(Selection.activeObject);
+            if (EditorUtility.IsPersistent(Selection.activeObject))
+                AddObjectToRecents(Selection.activeObject);
         }
 
         public static void AddObjectToRecents(Object obj)
