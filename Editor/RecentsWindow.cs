@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Editor
 {
@@ -13,8 +15,8 @@ namespace Editor
             public bool favorite;
         }
         
-        private List<Object> _objects;
-        private List<Object> _objects_favorites;
+        private Object[] _objects;
+        private Object[] _objects_favorites;
         private List<RecentObjectData> _sortedBuffer;
 
         private GUIStyle _favoriteObjectGUIStyle;
@@ -27,8 +29,8 @@ namespace Editor
 
         private void OnEnable()
         {
-            _objects = new List<Object>();
-            _objects_favorites = new List<Object>();
+            _objects = Array.Empty<Object>();
+            _objects_favorites = Array.Empty<Object>();
             RecentsHandler.OnChanged += OnChanged;
             OnChanged();
             Repaint();

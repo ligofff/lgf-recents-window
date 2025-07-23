@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
+using UnityEngine;
 using Object = UnityEngine.Object;
 
 namespace Editor
@@ -121,30 +122,38 @@ namespace Editor
             IdsBuffer_Favorites = EditorPrefs.GetString(PrefsIdFavorites).Split(';').ToList();
         }
 
-        public static List<Object> GetObjects()
+        public static Object[] GetObjects()
         {
-            var objects = new List<Object>();
-            foreach (var id in IdsBuffer)
+            var objects = new Object[IdsBuffer.Count];
+            GlobalObjectId[] ids = new GlobalObjectId[IdsBuffer.Count];
+            
+            for (int i = 0; i < IdsBuffer.Count; i++)
             {
-                if (GlobalObjectId.TryParse(id, out var globalObjectId))
+                if (GlobalObjectId.TryParse(IdsBuffer[i], out var globalObjectId))
                 {
-                    objects.Add(GlobalObjectId.GlobalObjectIdentifierToObjectSlow(globalObjectId));
+                    ids[i] = globalObjectId;
                 }
             }
-
+            
+            GlobalObjectId.GlobalObjectIdentifiersToObjectsSlow(ids, objects);
+            
             return objects;
         }
 
-        public static List<Object> GetObjects_Favorites()
+        public static Object[] GetObjects_Favorites()
         {
-            var objects = new List<Object>();
-            foreach (var id in IdsBuffer_Favorites)
+            var objects = new Object[IdsBuffer_Favorites.Count];
+            GlobalObjectId[] ids = new GlobalObjectId[IdsBuffer_Favorites.Count];
+            
+            for (int i = 0; i < IdsBuffer_Favorites.Count; i++)
             {
-                if (GlobalObjectId.TryParse(id, out var globalObjectId))
+                if (GlobalObjectId.TryParse(IdsBuffer_Favorites[i], out var globalObjectId))
                 {
-                    objects.Add(GlobalObjectId.GlobalObjectIdentifierToObjectSlow(globalObjectId));
+                    ids[i] = globalObjectId;
                 }
             }
+            
+            GlobalObjectId.GlobalObjectIdentifiersToObjectsSlow(ids, objects);
 
             return objects;
         }
